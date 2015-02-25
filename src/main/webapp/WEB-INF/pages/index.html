@@ -14,6 +14,7 @@
 
     <!-- Basic Styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="webjars/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="webjars/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="webjars/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
     <!-- Custom Styles -->
@@ -21,33 +22,34 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Tasker</a>
+<header>
+    <nav ng-controller="NavCtrl" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#me">Tasker</a>
+            </div>
+            <div class="navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{active: $location.path() == '/me'}"><a href="#me">Me</a></li>
+                    <li ng-class="{active: $location.path() == '/friend'}"><a href="#friends">Friends</a></li>
+                    <li ng-class="{active: $location.path() == '/tasks'}"><a href="#tasks">Tasks</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button class="btn btn-success navbar-right">Logout</button>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+            </div>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Me</a></li>
-                <li><a href="#friends">Friends</a></li>
-                <li><a href="#tasks">Tasks</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <button class="btn btn-success navbar-right">Logout</button>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
+    </nav>
+</header>
 <div class="container">
     <div ng-view></div>
 </div>

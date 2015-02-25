@@ -4,16 +4,18 @@ taskerApp.config(['$routeProvider','$locationProvider',
     function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: '/resources/templates/login.html',
-                controller: 'TasksController'
+                templateUrl: '/resources/templates/login.html'
             })
             .when('/register', {
-                templateUrl: '/resources/templates/register.html',
-                controller: 'TasksController'
+                templateUrl: '/resources/templates/register.html'
             })
             .when('/tasks', {
                 templateUrl: '/resources/templates/tasks.html',
-                controller: 'TasksController'
+                controller: 'TasksCtrl'
+            })
+            .when('/me', {
+                templateUrl: '/resources/templates/me.html',
+                controller: 'MeCtrl'
             })
             .otherwise({
                 redirectTo: '/'

@@ -16,8 +16,8 @@ body {
 .navbar-inverse .nav .active > a,
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
-    color: #CFD8DC;
-    background-color: #607D8B;
+    color: #FFFFFF;
+    background: #607D8B;
 }
 
 .navbar-inverse .btn-navbar {
@@ -99,8 +99,6 @@ body {
     border-top-right-radius: 0;
 }
 
-
-
 .form-signup {
     max-width: 330px;
     padding: 15px;
@@ -139,4 +137,37 @@ body {
 .form-signup  input[type="password"] {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.panel-group .panel {
+    border-radius: 0px;
+}
+
+.panel-group .panel-heading {
+    background: #FFFFFF;
+    cursor: pointer;
+    border-radius: 0px;
+}
+
+.panel {
+    border: none;
+    background-color: transparent;
+}
+
+.panel-group .panel-heading a:focus, a:hover {
+    text-decoration: none;
+}
+
+.thumbnail {
+    color: black;
+    border-radius: 0px;
+    border: none;
+}
+
+.thumbnail .caption h3 {
+ margin-top: 0px;
+}
+
+.panel-default>.panel-heading .badge {
+    background: #455A64;
 }
