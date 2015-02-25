@@ -1,0 +1,25 @@
+<div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default" ng-repeat="taskList in [0,1,2]" ng-click="collapseClc(taskList)">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" data-target="#one">
+                        От {{taskList.author}}: {{taskList.title}}
+                    </a>
+                    <span class="badge badge-default pull-right">2/3</span>
+                </h4>
+            </div>
+            <div id="{{taskList}}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="thumbnail" ng-repeat="task in [0,1,2,3]">
+                        <div class="caption">
+                            <button class="btn btn-primary pull-right">Выполнил</button>
+                            <h3>Заголовок: {{task.title}}</h3>
+                            <p>Описание: {{task.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
