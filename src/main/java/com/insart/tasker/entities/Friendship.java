@@ -3,20 +3,43 @@ package com.insart.tasker.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static com.insart.tasker.entities.Friendship.TABLE_NAME;
+
+/**
+ * User: thur
+ * Date: 18.02.2015
+ * Time: 0:43
+ */
 @Entity
-@Table(name = "friendship")
-public class Friendship implements Serializable {
+@Table(name = TABLE_NAME)
+public class Friendship  implements Serializable{
+
+    public static final String TABLE_NAME = "friendship";
+
+    private Long id;
+    private Boolean is_invite;
+    private User first_friend;
+    private  User second_friend;
 
     @Id
-    @GeneratedValue(generator = "increment")
     @Column(name = "id")
-    private Long id;
+    public Long getId() {
+        return id;
+    }
 
-    @Column(name="is_invite")
-    private Boolean is_invite;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    private User first_friend;
-    private User second_friend;
+    @Column(name = "is_invite")
+    public Boolean getIs_invite() {
+        return is_invite;
+    }
+
+    public void setIs_invite(Boolean is_invite) {
+        this.is_invite = is_invite;
+    }
+
 
     @OneToOne
     public User getFirst_friend() {
@@ -27,6 +50,7 @@ public class Friendship implements Serializable {
         this.first_friend = first_friend;
     }
 
+
     @OneToOne
     public User getSecond_friend() {
         return second_friend;
@@ -34,13 +58,5 @@ public class Friendship implements Serializable {
 
     public void setSecond_friend(User second_friend) {
         this.second_friend = second_friend;
-    }
-
-    public Boolean getIs_invite() {
-        return is_invite;
-    }
-
-    public void setIs_invite(Boolean is_invite) {
-        this.is_invite = is_invite;
     }
 }

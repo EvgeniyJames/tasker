@@ -2,23 +2,28 @@ package com.insart.tasker.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 
+import static com.insart.tasker.entities.TaskList.TABLE_NAME;
+
+/**
+ * User: thur
+ * Date: 18.02.2015
+ * Time: 0:43
+ */
 @Entity
-@Table(name = "tasklist")
-public class TaskList implements Serializable {
-    @Id
-    @GeneratedValue(generator = "increment")
-    @Column(name = "id")
+@Table(name = TABLE_NAME)
+public class TaskList implements Serializable{
+
+    public static final String TABLE_NAME = "tasklist";
+
     private Long id;
-
-    @Column(name = "title")
     private String title;
+    private User author; //автор
+   // private ArrayList<Task> tasks =new ArrayList<>(); //список тасков
 
-    private ArrayList<Task> tasks =new ArrayList<>(); //список тасков
 
-    private User author;
-
+    @Id
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -27,21 +32,13 @@ public class TaskList implements Serializable {
         this.id = id;
     }
 
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    @OneToMany
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
     }
 
     @OneToOne
@@ -52,5 +49,14 @@ public class TaskList implements Serializable {
     public void setAuthor(User author) {
         this.author = author;
     }
+
+   /* @OneToMany
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }*/
 
 }

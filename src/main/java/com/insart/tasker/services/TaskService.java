@@ -23,9 +23,8 @@ public class TaskService {
     }
 
     //добавить Task
-    public Task addTask(Task task)
-    {
-        Task savedTask=taskDAO.saveAndFlush(task);
+    public Task addTask(Task task) {
+        Task savedTask = taskDAO.saveAndFlush(task);
         return savedTask;
     }
 
@@ -35,11 +34,4 @@ public class TaskService {
         taskDAO.delete(id);
     }
 
-    public List<Task> findByDescription(String description) {
-        return taskDAO.findByDescription(description);
-    }
-
-    public List<Task> findByTitle(String title) {
-        return taskDAO.findByTitleCustom(title);
-    }
 }

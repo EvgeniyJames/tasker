@@ -3,7 +3,7 @@
  * Dimark Software, Inc.
  * All rights reserved
  */
-package com.insart;
+package insart;
 
 
 import com.insart.tasker.ApplicationConfiguration;

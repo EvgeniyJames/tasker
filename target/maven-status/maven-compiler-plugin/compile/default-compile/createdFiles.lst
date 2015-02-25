@@ -1,10 +1,13 @@
-com\insart\ApplicationInitializer.class
+com\insart\tasker\entities\Friendship.class
 com\insart\tasker\services\TaskService.class
 com\insart\tasker\MvcConfiguration.class
 com\insart\tasker\controllers\TaskController.class
-com\insart\tasker\entities\Task.class
 com\insart\tasker\TaskerConstants.class
-com\insart\tasker\enums\TaskStatus.class
-com\insart\tasker\controllers\GuiController.class
 com\insart\tasker\ApplicationConfiguration.class
 com\insart\tasker\dao\TaskDAO.class
+com\insart\tasker\entities\Task.class
+com\insart\tasker\entities\TaskList.class
+insart\ApplicationInitializer.class
+com\insart\tasker\enums\TaskStatus.class
+com\insart\tasker\controllers\GuiController.class
+com\insart\tasker\entities\User.class

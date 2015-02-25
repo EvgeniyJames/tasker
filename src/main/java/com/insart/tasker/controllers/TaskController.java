@@ -5,10 +5,8 @@ import com.insart.tasker.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,20 +24,5 @@ public class TaskController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Task> findAllTasks() {
         return taskService.findAll();
-    }
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public List<Task> findTasks(
-            @RequestParam(value = "description", required = false)String description,
-            @RequestParam(value = "title", required = false)String title
-            ) {
-
-        if (description != null) {
-            System.out.println(">>>> " + description);
-            return taskService.findByDescription(description);
-        } else if (title != null) {
-            return taskService.findByTitle(title);
-        } else {
-            return Collections.emptyList();
-        }
     }
 }

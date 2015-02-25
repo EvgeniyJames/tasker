@@ -1,31 +1,32 @@
 package com.insart.tasker.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static com.insart.tasker.entities.User.TABLE_NAME;
+
+/**
+ * User: thur
+ * Date: 18.02.2015
+ * Time: 0:43
+ */
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
-    @Id
-    @GeneratedValue(generator = "increment")
-    @Column(name = "id")
+@Table(name = TABLE_NAME)
+public class User implements Serializable{
+
+    public static final String TABLE_NAME = "user";
+
     private Long id;
-
-    @Column(name="id")
-    private String name;
-
-    @Column(name="login")
     private String login;
-
-    @Column(name="password")
     private String password;
-
-    @Column(name="email")
     private String email;
-
     private ArrayList<TaskList> taskLists=new ArrayList<>(); //список тасклистов
-
+    @Id
+    @Column(name = "id")
     public Long getId() {
         return id;
     }
@@ -34,14 +35,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Column(name = "login")
     public String getLogin() {
         return login;
     }
@@ -50,6 +44,7 @@ public class User implements Serializable {
         this.login = login;
     }
 
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -58,16 +53,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @OneToMany
-    public ArrayList<TaskList> getTaskLists() {
-        return taskLists;
-    }
-
-    public void setTaskLists(ArrayList<TaskList> taskLists) {
-        this.taskLists = taskLists;
-    }
-
-
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -75,4 +61,13 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    /*@OneToOne
+    public ArrayList<TaskList> getTaskLists() {
+        return taskLists;
+    }
+
+    public void setTaskLists(ArrayList<TaskList> taskLists) {
+        this.taskLists = taskLists;
+    }*/
 }
