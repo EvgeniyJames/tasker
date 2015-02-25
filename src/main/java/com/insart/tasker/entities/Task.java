@@ -3,26 +3,31 @@ package com.insart.tasker.entities;
 import com.insart.tasker.enums.TaskStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * User: thur
- * Date: 18.02.2015
- * Time: 0:43
- */
 @Entity
 @Table(name = "task")
-@NamedQuery(name = "Task.getAll", query = "select t from Task t")
-public class Task {
-    private Long id;
-    private String title;
-    private String description;
-    private TaskStatus status;
-    private Date created;
-    private Date updated;
-
+public class Task implements Serializable {
     @Id
+    @GeneratedValue(generator = "increment")
     @Column(name = "id")
+    private Long id;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "description")
+    private String description;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "status")
+    private TaskStatus status;
+
+
+    private User executor; //исполнитель
+
     public Long getId() {
         return id;
     }
@@ -31,7 +36,6 @@ public class Task {
         this.id = id;
     }
 
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -40,7 +44,6 @@ public class Task {
         this.title = title;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -49,8 +52,6 @@ public class Task {
         this.description = description;
     }
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "status")
     public TaskStatus getStatus() {
         return status;
     }
@@ -59,34 +60,13 @@ public class Task {
         this.status = status;
     }
 
-    @Column(name = "created")
-    public Date getCreated() {
-        return created;
+    @OneToOne
+    public User getExecutor() {
+        return executor;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    @Column(name = "updated")
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", created=" + created +
-                ", updated=" + updated +
-                '}';
+    public void setExecutor(User executor) {
+        this.executor = executor;
     }
 
 }
