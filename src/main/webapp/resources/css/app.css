@@ -47,7 +47,7 @@ body {
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #727272;
+    border-color: transparent;
 }
 
 .form-control {
