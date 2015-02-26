@@ -1,9 +1,8 @@
 package com.insart.tasker.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -26,7 +25,9 @@ public class User implements Serializable{
     private String email;
     private ArrayList<TaskList> taskLists=new ArrayList<>(); //список тасклистов
     @Id
-    @Column(name = "id")
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id", length = 6, nullable = false)
     public Long getId() {
         return id;
     }
