@@ -1,7 +1,10 @@
 package com.insart.tasker.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import static com.insart.tasker.entities.TaskList.TABLE_NAME;
 
@@ -19,11 +22,15 @@ public class TaskList implements Serializable{
     private Long id;
     private String title;
     private User author; //автор
-   // private ArrayList<Task> tasks =new ArrayList<>(); //список тасков
+
+    @OneToMany
+    private ArrayList<Task> tasks =new ArrayList<>(); //список тасков
 
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id", length = 6, nullable = false)
     public Long getId() {
         return id;
     }
@@ -50,13 +57,13 @@ public class TaskList implements Serializable{
         this.author = author;
     }
 
-   /* @OneToMany
+
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
-    }*/
+    }
 
 }

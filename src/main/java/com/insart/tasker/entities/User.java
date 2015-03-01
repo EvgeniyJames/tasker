@@ -23,7 +23,7 @@ public class User implements Serializable{
     private String login;
     private String password;
     private String email;
-    private ArrayList<TaskList> taskLists=new ArrayList<>(); //список тасклистов
+
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
@@ -63,12 +63,4 @@ public class User implements Serializable{
         this.email = email;
     }
 
-    /*@OneToOne
-    public ArrayList<TaskList> getTaskLists() {
-        return taskLists;
-    }
-
-    public void setTaskLists(ArrayList<TaskList> taskLists) {
-        this.taskLists = taskLists;
-    }*/
 }
