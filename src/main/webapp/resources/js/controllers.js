@@ -27,26 +27,30 @@ angular.module('taskerApp')
 
     .controller('MeCtrl', ['$scope', function ($scope) {
 
-        $scope.color = 'task-do-color';
-
-        $scope.getPanelName = function (index) {
-            $scope.label = "sss";
-            return "#collapse"
+        $scope.collapseClc = function (index) {
+            $("#" + index).collapse('toggle')
         }
 
-        $scope.getPanelId = function (index) {
-            return "collapse"
+        $scope.doneClick = function () {
+
         }
+
+        $scope.removeClick = function () {
+
+        }
+    }])
+
+    .controller('UserCtrl', ['$scope', function ($scope) {
 
         $scope.collapseClc = function (index) {
             $("#" + index).collapse('toggle')
         }
 
-        $scope.doneClick = function() {
-
+        $scope.isFriend = function () {
+            return true;
         }
+    }])
+    .controller('FriendsCtrl', ['$scope', function ($scope) {
 
-        $scope.removeClick = function() {
 
-        }
     }]);

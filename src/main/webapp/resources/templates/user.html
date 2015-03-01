@@ -1,13 +1,21 @@
 <div>
     <div class="thumbnail user-inf">
         <div class="caption">
+            <div class="btn-group-vertical pull-right">
+                <button ng-if="isFriend()" class="btn btn-default">
+                    Удалить из друзей
+                </button>
+                <button ng-if="!isFriend()" class="btn btn-primary">
+                    Добавить в друзья
+                </button>
+            </div>
             <h3>Имя Пользователя</h3>
 
             <p>login</p>
         </div>
     </div>
 
-    <div class="panel-group" id="accordion">
+    <div ng-if="isFriend()" class="panel-group" id="accordion">
         <div class="panel panel-default" ng-repeat="taskList in [0,1,2]">
             <div class="panel-heading" ng-click="collapseClc(taskList)">
                 <h4 class="panel-title">
@@ -22,9 +30,6 @@
                     <div class="thumbnail" ng-repeat="task in [0,1,2,3]">
                         <div class="caption">
                             <div class="btn-group-vertical pull-right">
-                                <button class="btn btn-success" data-toggle="button" ng-click="doneClick()">
-                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                </button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#basicModal">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button>

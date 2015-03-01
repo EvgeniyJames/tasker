@@ -17,6 +17,14 @@ taskerApp.config(['$routeProvider','$locationProvider',
                 templateUrl: '/resources/templates/me.html',
                 controller: 'MeCtrl'
             })
+            .when('/user', {
+                templateUrl: '/resources/templates/user.html',
+                controller: 'UserCtrl'
+            })
+            .when('/friends', {
+                templateUrl: '/resources/templates/friends.html',
+                controller: 'FriendsCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
