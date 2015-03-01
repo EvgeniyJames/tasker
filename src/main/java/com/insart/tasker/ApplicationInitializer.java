@@ -3,10 +3,9 @@
  * Dimark Software, Inc.
  * All rights reserved
  */
-package insart;
+package com.insart.tasker;
 
 
-import com.insart.tasker.ApplicationConfiguration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
