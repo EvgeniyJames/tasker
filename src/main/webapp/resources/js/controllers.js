@@ -26,6 +26,9 @@ angular.module('taskerApp')
     }])
 
     .controller('MeCtrl', ['$scope', function ($scope) {
+
+        $scope.color = 'task-do-color';
+
         $scope.getPanelName = function (index) {
             $scope.label = "sss";
             return "#collapse"
@@ -37,5 +40,13 @@ angular.module('taskerApp')
 
         $scope.collapseClc = function (index) {
             $("#" + index).collapse('toggle')
+        }
+
+        $scope.doneClick = function() {
+
+        }
+
+        $scope.removeClick = function() {
+
         }
     }]);

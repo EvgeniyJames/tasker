@@ -1,7 +1,16 @@
 <div>
+    <div class="thumbnail user-inf">
+        <div class="caption">
+            <h3>Имя Пользователя</h3>
+
+            <p>login</p>
+        </div>
+    </div>
+
+
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default" ng-repeat="taskList in [0,1,2]" ng-click="collapseClc(taskList)">
-            <div class="panel-heading">
+        <div class="panel panel-default" ng-repeat="taskList in [0,1,2]">
+            <div class="panel-heading" ng-click="collapseClc(taskList)">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" data-target="#one">
                         От {{taskList.author}}: {{taskList.title}}
@@ -13,8 +22,16 @@
                 <div class="panel-body">
                     <div class="thumbnail" ng-repeat="task in [0,1,2,3]">
                         <div class="caption">
-                            <button class="btn btn-primary pull-right">Выполнил</button>
+                            <div class="btn-group-vertical pull-right">
+                                <button class="btn btn-success" data-toggle="button" ng-click="doneClick()">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                            </div>
                             <h3>Заголовок: {{task.title}}</h3>
+
                             <p>Описание: {{task.description}}</p>
                         </div>
                     </div>
