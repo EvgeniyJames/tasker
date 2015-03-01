@@ -2,10 +2,12 @@ C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\TaskerCo
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\insart\ApplicationInitializer.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\MvcConfiguration.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\entities\Friendship.java
+C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\dao\TaskListDAO.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\services\UserService.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\ApplicationConfiguration.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\enums\TaskStatus.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\controllers\GuiController.java
+C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\dao\FriendshipDAO.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\entities\Task.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\controllers\TaskController.java
 C:\Users\Nastya\Desktop\practica\tasker\src\main\java\com\insart\tasker\dao\UserDAO.java

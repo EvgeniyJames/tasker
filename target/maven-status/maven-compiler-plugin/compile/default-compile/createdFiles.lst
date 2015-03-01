@@ -1,10 +1,12 @@
 com\insart\tasker\entities\Friendship.class
 com\insart\tasker\services\TaskService.class
+com\insart\tasker\dao\TaskListDAO.class
 com\insart\tasker\services\UserService.class
 com\insart\tasker\MvcConfiguration.class
 com\insart\tasker\controllers\TaskController.class
 com\insart\tasker\dao\UserDAO.class
 com\insart\tasker\TaskerConstants.class
+com\insart\tasker\dao\FriendshipDAO.class
 com\insart\tasker\ApplicationConfiguration.class
 com\insart\tasker\dao\TaskDAO.class
 com\insart\tasker\entities\Task.class
