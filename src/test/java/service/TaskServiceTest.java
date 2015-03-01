@@ -1,5 +1,6 @@
 package service;
 
+import com.insart.tasker.entities.Task;
 import com.insart.tasker.services.TaskService;
 import util.TaskUtil;
 import config.TestDataBaseConfig;
@@ -33,10 +34,15 @@ public class TaskServiceTest {
         em = emf.createEntityManager();
     }
 
+   public  Task task=new Task();
+    public void setTaskInfo(Task task_info)
+    {
+        task=task_info;
+    }
+
+
     @Test
     public void testSaveTask() throws Exception {
-        for(int i=0;i<10;i++)
-        { taskService.addTask(TaskUtil.createTask("title"+i, "desciption"+i));
-        }
+         taskService.addTask(TaskUtil.createTask(task));
     }
 }

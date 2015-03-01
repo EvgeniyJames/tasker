@@ -15,4 +15,8 @@ public class TaskUtil {
         task.setUpdated(new Date());
         return task;
     }
+    public static Task createTask(Task task) {
+        return task;
+    }
+
 }
