@@ -6,5 +6,5 @@ package com.insart.tasker.enums;
  * Time: 0:45
  */
 public enum TaskStatus {
-    DO, DONE, CANCELED
+    DO, DONE, CANCELED, INACTIVE
 }

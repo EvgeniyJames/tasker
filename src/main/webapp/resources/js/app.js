@@ -5,10 +5,9 @@ taskerApp.config(['$routeProvider','$locationProvider',
         $routeProvider
             .when('/', {
                 templateUrl: '/resources/templates/tasks.html',
-                controller: 'TasksController'
+                controller: 'UsersController'
             })
             .otherwise({
                 redirectTo: '/'
             });
-
     }]);

@@ -1,18 +1,17 @@
 angular.module('taskerApp')
-    .controller('TasksController', [ '$scope', '$http', function ($scope, $http) {
+    .controller('UsersController', [ '$scope', '$http', function ($scope, $http) {
 
-        $scope.tasks = {};
+        $scope.users = {};
 
-        $scope.loadTasks = function(){
-            $http.get('http://localhost:8080/task/')
+        $scope.loadUsers = function(){
+            $http.get('http://localhost:8080/user/getUsers/')
                 .success(function(data, status, headers, config) {
-                    $scope.tasks = data;
+                    $scope.users = data;
                 })
                 .error(function(data, status, headers, config) {
                     alert('Error loading tasks');
                 });
         };
 
-
-        $scope.loadTasks();
+        $scope.loadUsers();
     }]);
