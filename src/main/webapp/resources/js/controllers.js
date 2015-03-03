@@ -19,7 +19,6 @@ angular.module('taskerApp')
     .controller('FindUsersCtrl', ['$scope', '$http', function ($scope, $http) {
 
         $scope.findedUsers = {};
-
         $scope.loadFindedUsers = function () {
             $http.get('http://localhost:8080/user/getUsers')
                 .success(function (data, status, headers, config) {
