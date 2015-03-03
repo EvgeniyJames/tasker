@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by Evgeniy James on 22.02.2015.
+ * User: Evgeniy James
+ * Date: 22.02.2015
  */
 @Entity
 public class Friendship implements Serializable{

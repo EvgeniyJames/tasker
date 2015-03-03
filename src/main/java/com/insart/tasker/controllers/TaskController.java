@@ -3,13 +3,11 @@ package com.insart.tasker.controllers;
 import com.insart.tasker.enums.TaskStatus;
 import com.insart.tasker.model.Task;
 import com.insart.tasker.services.TaskService;
-import org.dbunit.util.concurrent.Takable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
