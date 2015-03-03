@@ -3,39 +3,63 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title>Tasker</title>
     <meta name="description" content="Tasker"/>
     <meta name="author" content=""/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
     <!-- Basic Styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="webjars/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="webjars/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="webjars/font-awesome/4.3.0/css/font-awesome.min.css"/>
 
-    <!-- FAVICONS -->
-    <link rel="shortcut icon" href="/resources/img/favicon/favicon.ico" type="image/x-icon"/>
-    <link rel="icon" href="/resources/img/favicon/favicon.ico" type="image/x-icon"/>
-
-    <!-- GOOGLE FONT -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"/>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/resources/css/app.css"/>
 </head>
 
-<body >
-   <h1>Tasker</h1>
-
-   <div class="container">
-       <div ng-view></div>
-   </div>
-
-   <script type="text/javascript" src="webjars/jquery/2.1.3/jquery.min.js"></script>
-   <script type="text/javascript" src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-   <script type="text/javascript" src="webjars/angularjs/1.3.13/angular.min.js"></script>
-   <script type="text/javascript" src="webjars/angularjs/1.3.13/angular-route.min.js"></script>
-   <script type="text/javascript" src="/resources/js/app.js"></script>
-   <script type="text/javascript" src="/resources/js/controllers.js"></script>
+<body>
+<header>
+    <nav ng-controller="NavCtrl" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#me">Tasker</a>
+            </div>
+            <div class="navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{active: $location.path() == '/me'}"><a href="#me">Me</a></li>
+                    <li ng-class="{active: $location.path() == '/friends'}"><a href="#friends">Friends</a></li>
+                    <li ng-class="{active: $location.path() == '/tasks'}"><a href="#tasks">Tasks</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button class="btn btn-warning navbar-right">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    </button>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div ng-view></div>
+</div>
+<script type="text/javascript" src="webjars/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webjars/angularjs/1.3.13/angular.min.js"></script>
+<script type="text/javascript" src="webjars/angularjs/1.3.13/angular-route.min.js"></script>
+<script type="text/javascript" src="/resources/js/app.js"></script>
+<script type="text/javascript" src="/resources/js/controllers.js"></script>
 </body>
-
-
 </html>
