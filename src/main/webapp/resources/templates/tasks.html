@@ -1,19 +1,25 @@
-<div class="col-md-8 col-md-offset-2">
-    <table class="table table-striped table-bordered table-hover">
+<div>
+    <table class="table table-striped table-hover">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Login</th>
-            <th>Password</th>
-            <th>Name</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in users">
-            <td>{{user.id}}</td>
-            <td>{{user.login}}</td>
-            <td>{{user.password}}</td>
-            <td>{{user.name}}</td>
+        <tr ng-repeat="task in tasks">
+            <td>{{task.id}}</td>
+            <td>{{task.title}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.status}}</td>
+            <td>{{todo.created | date}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteTodo(todo)">Delete</button>
+            </td>
         </tr>
         </tbody>
     </table>
