@@ -26,11 +26,20 @@ public class TasklistController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Получить список всех ТЛ
+     * @return Список всех Тасклистов
+     */
     @RequestMapping("/getAll")
     public List<Tasklist> getAll() {
         return tasklistService.findAll();
     }
 
+    /**
+     * Получить определённый ТЛ
+     * @param id id ТЛ
+     * @return Объект ТЛ из БД
+     */
     @RequestMapping("/get")
     public Tasklist get(
             @RequestParam(value = "id") String id
@@ -44,6 +53,12 @@ public class TasklistController {
         }
     }
 
+    /**
+     * Добавить ТЛ в БД
+     * @param title Заголовок ТЛ
+     * @param idAuthor id автора ТЛ
+     * @return Запись с ТЛ в БД
+     */
     @RequestMapping("/add")
     public Tasklist add(
             @RequestParam(value = "title") String title,
@@ -55,6 +70,10 @@ public class TasklistController {
         return tasklistService.save(tasklist);
     }
 
+    /**
+     * Удалить ТЛ из БД
+     * @param id id удаляемого ТЛ
+     */
     @RequestMapping("/delete")
     public void delete(
             @RequestParam(value = "id") String id
@@ -69,6 +88,11 @@ public class TasklistController {
         }
     }
 
+    /**
+     * Получить список ТЛ пользователя
+     * @param id id пользователя
+     * @return Список его ТЛ
+     */
     @RequestMapping("/getUserTasklists")
     public List<Tasklist> getUserTasklists(
             @RequestParam(value = "id") String id

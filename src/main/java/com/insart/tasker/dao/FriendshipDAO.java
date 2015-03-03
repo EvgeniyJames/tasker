@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Evgeniy James on 22.02.2015.
+ * User: Evgeniy James
+ * Date: 22.02.2015
  */
 @Repository
 public interface FriendshipDAO extends JpaRepository<Friendship, Long> {

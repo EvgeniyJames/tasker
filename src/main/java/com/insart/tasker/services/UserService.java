@@ -139,12 +139,6 @@ public class UserService {
         friendshipDAO.delete(friendshipDAO.findByIdOneAndIdTwo(two.getId(), one.getId()));
     }
 
-    /**
-     * Найти всех друзей пользователя
-     *
-     * @param idUser User that will find friends
-     * @return Set of user's friends
-     */
     public Set findUserFriends(Long idUser) {
 
         User user = userDAO.findOne(idUser);
@@ -155,12 +149,6 @@ public class UserService {
         return findUsersPeopleByRelationship(user, FriendshipStatus.FRIENDS);
     }
 
-    /**
-     * Найти всех Юзеров, которым user отправил запросы
-     *
-     * @param idUser
-     * @return
-     */
     public Set<User> findUserRequestsFriends(Long idUser) {
 
         User user = userDAO.findOne(idUser);
@@ -172,12 +160,6 @@ public class UserService {
         return findUsersPeopleByRelationship(user, FriendshipStatus.INVITE);
     }
 
-    /**
-     * Выбрать пользователей, которые отправили запрос на дружбу с user
-     *
-     * @param idUser - Искомый Юзер
-     * @return - Сет Юзеров, которые добавляют user
-     */
     public Set<User> findUserInviters(Long idUser) {
 
         User user = findUserById(idUser);

@@ -22,11 +22,20 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    /**
+     * Получить все Таски
+     * @return Список всех Тасков
+     */
     @RequestMapping("/getAll")
     public List<Task> getAll() {
         return taskService.findAll();
     }
 
+    /**
+     * Получить определённый Таск
+     * @param id id Таска
+     * @return Объект Таск из БД
+     */
     @RequestMapping("/get")
     public Task get(
             @RequestParam(value = "id") String id
@@ -41,6 +50,14 @@ public class TaskController {
 
     }
 
+    /**
+     * Добавить Таск в БД
+     * @param title Заголовок
+     * @param description Описание
+     * @param idExecutor id исполнителя
+     * @param idTasklist id ТЛ
+     * @return Запись в БД с Таском
+     */
     @RequestMapping("/add")
     public Task add(
             @RequestParam(value = "title") String title,
@@ -67,6 +84,10 @@ public class TaskController {
 
     }
 
+    /**
+     * Удалить Таск из БД
+     * @param id id удаляемого Таска
+     */
     @RequestMapping("/delete")
     public void detele(
             @RequestParam(value = "id") String id
@@ -80,6 +101,11 @@ public class TaskController {
         }
     }
 
+    /**
+     * Получить набор Тасков из БД по стутусу
+     * @param status Статус Таска
+     * @return Набор Тасков по статусу
+     */
     @RequestMapping("/getByStatus")
     public Set<Task> getByStatus(
             @RequestParam(value = "status") String status
@@ -87,6 +113,11 @@ public class TaskController {
         return taskService.findByStatus(status);
     }
 
+    /**
+     * Набор Тасков по испольнителю
+     * @param idExecutor id испольнителя
+     * @return Набор Тасков исполнителя
+     */
     @RequestMapping("/getByExecutor")
     public Set<Task> getByExecutor(
             @RequestParam(value = "idExecutor") String idExecutor
