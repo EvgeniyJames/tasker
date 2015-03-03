@@ -1,5 +1,6 @@
 package com.insart.tasker.controllers;
 
+import com.insart.tasker.model.Task;
 import com.insart.tasker.model.Tasklist;
 import com.insart.tasker.services.TaskService;
 import com.insart.tasker.services.TasklistService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Evgeniy James
@@ -59,7 +61,7 @@ public class TasklistController {
     ) {
         try {
             Long valueOf = Long.valueOf(id);
-            taskService.findByIdTaskList(valueOf);
+            taskService.deleteByIdTasklist(valueOf);
             tasklistService.delete(valueOf);
         } catch (NumberFormatException e) {
             System.out.println("Delete TL ID Exception. " + e);

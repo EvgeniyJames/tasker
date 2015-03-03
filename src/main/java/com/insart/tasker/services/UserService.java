@@ -4,7 +4,6 @@ import com.insart.tasker.dao.FriendshipDAO;
 import com.insart.tasker.dao.UserDAO;
 import com.insart.tasker.enums.FriendshipStatus;
 import com.insart.tasker.model.Friendship;
-import com.insart.tasker.model.Tasklist;
 import com.insart.tasker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,10 +55,10 @@ public class UserService {
         }
     }
 
-    public void delete(User user) {
-        friendshipDAO.deleteByIdUser(user.getId());
-        tasklistService.deleteByIdAuthor(user.getId());
-        userDAO.delete(user);
+    public void delete(Long id) {
+        friendshipDAO.deleteByIdUserCustom(id);
+        tasklistService.deleteByIdAuthor(id);
+        userDAO.delete(id);
     }
 
     /**

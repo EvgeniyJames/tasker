@@ -51,8 +51,7 @@ public class UserController {
             System.err.println("Number Format Exception. " + e);
             throw new NumberFormatException();
         }
-        User user = userService.findUserById(l);
-        userService.delete(user);
+        userService.delete(l);
     }
 
     @RequestMapping("/getUsers")

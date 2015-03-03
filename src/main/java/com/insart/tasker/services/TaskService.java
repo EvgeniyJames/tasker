@@ -59,7 +59,11 @@ public class TaskService {
         return taskDAO.findByIdExecutor(idExecutor);
     }
 
-    public Set<Task> findByIdTaskList(Long idTasklist) {
+    public Set<Task> findByIdTasklist(Long idTasklist) {
         return taskDAO.findByIdTasklist(idTasklist);
+    }
+
+    public void deleteByIdTasklist(Long idTasklist) {
+        taskDAO.deleteByIdTasklist(idTasklist);
     }
 }

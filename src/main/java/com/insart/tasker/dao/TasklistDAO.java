@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public interface TasklistDAO extends JpaRepository<Tasklist, Long> {
 
     List<Tasklist> findByIdAuthor(Long valueOf);
 
+    @Transactional
     @Modifying
-    @Query("delete from tasklist t where tasklist.getIdAuthor = ?1")
+    @Query("delete from Tasklist t where t.idAuthor = ?1")
     void deleteByIdAuthor(long id);
 }

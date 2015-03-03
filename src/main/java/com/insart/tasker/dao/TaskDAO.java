@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -23,8 +24,9 @@ public interface TaskDAO extends JpaRepository<Task, Long> {
 
     Set<Task> findByIdTasklist(Long idTasklist);
 
+    @Transactional
     @Modifying
-    @Query("delete task t where t.getIdTasklist = ?1")
+    @Query("delete Task t where t.idTasklist = ?1")
     void deleteByIdTasklist(long id);
 
     /*@Query("select object (o) from Task as o where o.title = ?1")
