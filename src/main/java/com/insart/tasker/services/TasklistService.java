@@ -1,74 +1,37 @@
 package com.insart.tasker.services;
 
-import com.insart.tasker.dao.TaskDAO;
-import com.insart.tasker.dao.TasklistDAO;
-import com.insart.tasker.dao.UserDAO;
-import com.insart.tasker.model.Task;
-import com.insart.tasker.model.Tasklist;
+import com.insart.tasker.dao.TaskListDAO;
+import com.insart.tasker.entities.TaskList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 /**
- * User: Evgeniy James
- * Date: 22.02.2015
+ * User: thur
+ * Date: 18.02.2015
+ * Time: 1:26
  */
 @Service
-public class TasklistService {
+public class TaskListService {
 
     @Autowired
-    private TasklistDAO tasklistDAO;
+    private TaskListDAO taskListDAO;
 
-    @Autowired
-    private UserDAO userDAO;
-
-    @Autowired
-    private TaskDAO taskDAO;
-
-    public List<Tasklist> findAll(){
-        return tasklistDAO.findAll();
+    public List<TaskList> findAll() {
+        return taskListDAO.findAll();
     }
 
-    public Tasklist save(Tasklist tasklist) {
-        if (userDAO.exists(tasklist.getIdAuthor())) {
-            return tasklistDAO.save(tasklist);
-        } else {
-            return new Tasklist();
-        }
+    //добавить TaskList
+    public TaskList addTaskList(TaskList taskList) {
+        TaskList savedTaskList = taskListDAO.saveAndFlush(taskList);
+        return savedTaskList;
     }
 
-    public Tasklist get(Long id) {
-        return tasklistDAO.findOne(id);
+    //удалить TaskList по id
+    public void deleteTaskList(long id)
+    {
+        taskListDAO.delete(id);
     }
 
-    /*
-    При удалении TL нужно удалить все Таски, привязанные к нему
-     */
-    public void delete(Long id) {
-        taskDAO.deleteByIdTasklist(id);
-        tasklistDAO.delete(tasklistDAO.findOne(id));
-    }
-
-    public List<Tasklist> findByIdAuthor(Long valueOf) {
-        if (userDAO.exists(valueOf)) {
-            return tasklistDAO.findByIdAuthor(valueOf);
-        }
-        else {
-            return Collections.emptyList();
-        }
-    }
-
-    /*
-    Когда удаляем Юзера - автора Тасклистов
-     */
-    public void deleteByIdAuthor(long idAuthor) {
-        List<Tasklist> byIdAuthor = tasklistDAO.findByIdAuthor(idAuthor);
-        for (Tasklist tasklist : byIdAuthor) {
-            taskDAO.deleteByIdTasklist(tasklist.getId());
-        }
-        tasklistDAO.deleteByIdAuthor(idAuthor);
-    }
 }
