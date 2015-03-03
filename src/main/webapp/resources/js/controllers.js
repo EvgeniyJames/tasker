@@ -16,6 +16,23 @@ angular.module('taskerApp')
         $scope.loadTasks();
     }])
 
+    .controller('FindUsersCtrl', ['$scope', '$http', function ($scope, $http) {
+
+        $scope.findedUsers = {};
+
+        $scope.loadFindedUsers = function () {
+            $http.get('http://localhost:8080/user/getUsers')
+                .success(function (data, status, headers, config) {
+                    $scope.findedUsers = data;
+                })
+                .error(function (data, status, headers, config) {
+                    alert('Error loading findedUsers');
+                });
+        };
+
+        $scope.loadFindedUsers();
+    }])
+
     .controller('NavCtrl', ['$scope', '$location', function ($scope, $location) {
         $scope.isCollapsed = true;
         $scope.$on('$routeChangeSuccess', function () {

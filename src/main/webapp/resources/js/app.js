@@ -13,6 +13,10 @@ taskerApp.config(['$routeProvider','$locationProvider',
                 templateUrl: '/resources/templates/tasks.html',
                 controller: 'TasksCtrl'
             })
+            .when('/findUsers', {
+                templateUrl: '/resources/templates/findUsers.html',
+                controller: 'FindUsersCtrl'
+            })
             .when('/me', {
                 templateUrl: '/resources/templates/me.html',
                 controller: 'MeCtrl'
