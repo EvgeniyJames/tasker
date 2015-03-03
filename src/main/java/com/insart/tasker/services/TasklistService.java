@@ -1,7 +1,9 @@
 package com.insart.tasker.services;
 
+import com.insart.tasker.dao.TaskDAO;
 import com.insart.tasker.dao.TasklistDAO;
 import com.insart.tasker.dao.UserDAO;
+import com.insart.tasker.model.Task;
 import com.insart.tasker.model.Tasklist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class TasklistService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private TaskDAO taskDAO;
+
     public List<Tasklist> findAll(){
         return tasklistDAO.findAll();
     }
@@ -39,7 +44,11 @@ public class TasklistService {
         return tasklistDAO.findOne(id);
     }
 
+    /*
+    При удалении TL нужно удалить все Таски, привязанные к нему
+     */
     public void delete(Long id) {
+        taskDAO.deleteByIdTasklist(id);
         tasklistDAO.delete(tasklistDAO.findOne(id));
     }
 
@@ -50,5 +59,16 @@ public class TasklistService {
         else {
             return Collections.emptyList();
         }
+    }
+
+    /*
+    Когда удаляем Юзера - автора Тасклистов
+     */
+    public void deleteByIdAuthor(long idAuthor) {
+        List<Tasklist> byIdAuthor = tasklistDAO.findByIdAuthor(idAuthor);
+        for (Tasklist tasklist : byIdAuthor) {
+            taskDAO.deleteByIdTasklist(tasklist.getId());
+        }
+        tasklistDAO.deleteByIdAuthor(idAuthor);
     }
 }

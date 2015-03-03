@@ -3,6 +3,8 @@ package com.insart.tasker.dao;
 import com.insart.tasker.enums.FriendshipStatus;
 import com.insart.tasker.model.Friendship;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +23,8 @@ public interface FriendshipDAO extends JpaRepository<Friendship, Long> {
     List<Friendship> findByIdOneAndIdTwo(Long idOne, Long idTwo);
 
     Set<Friendship> findByIdTwoAndRelationship(Long idTwo, FriendshipStatus relationship);
+
+    @Modifying
+    @Query("delete friendship f where f.getIdOne = ?1 or f.getIdTwo = ?1")
+    void deleteByIdUser(long id);
 }

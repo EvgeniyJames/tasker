@@ -4,6 +4,7 @@ import com.insart.tasker.dao.FriendshipDAO;
 import com.insart.tasker.dao.UserDAO;
 import com.insart.tasker.enums.FriendshipStatus;
 import com.insart.tasker.model.Friendship;
+import com.insart.tasker.model.Tasklist;
 import com.insart.tasker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class UserService {
 
     @Autowired
     private FriendshipDAO friendshipDAO;
+
+    @Autowired
+    private TasklistService tasklistService;
 
     /**
      * Список всех Юзеров
@@ -53,6 +57,8 @@ public class UserService {
     }
 
     public void delete(User user) {
+        friendshipDAO.deleteByIdUser(user.getId());
+        tasklistService.deleteByIdAuthor(user.getId());
         userDAO.delete(user);
     }
 
