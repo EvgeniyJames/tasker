@@ -51,7 +51,7 @@ public class UserServiceTest {
     public void testFindAll()
     {   List <User> allUsers = userService.findAll();
         for(User user : allUsers)
-        { System.out.println("user login: "+user.getLogin()+",user password: "+user.getPassword()+",user name: "+user.getName());
+        { System.out.println(user);
         }
     }
 
