@@ -1,9 +1,8 @@
 <div>
-
-    <form class="form-signin" role="form">
+    <form method="post" class="form-signin" role="form" action="/j_spring_security_check">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
+        <input name="j_username" type="login" class="form-control" placeholder="Login" required autofocus>
+        <input name="j_password" type="password" class="form-control" placeholder="Password" required>
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
         </label>

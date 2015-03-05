@@ -26,5 +26,4 @@ public interface TaskDAO extends JpaRepository<Task, Long> {
     @Modifying
     @Query("delete Task t where t.idTasklist = ?1")
     void deleteByIdTasklist(long id);
-
 }

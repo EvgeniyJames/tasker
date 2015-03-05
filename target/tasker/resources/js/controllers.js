@@ -4,7 +4,7 @@ angular.module('taskerApp')
         $scope.tasks = {};
 
         $scope.loadTasks = function () {
-            $http.get('http://localhost:8080/task/')
+            $http.get('http://localhost:8080/task/getAll')
                 .success(function (data, status, headers, config) {
                     $scope.tasks = data;
                 })

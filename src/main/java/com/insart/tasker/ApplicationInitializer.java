@@ -22,6 +22,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(ApplicationConfiguration.class);
+        ctx.register(SecurityConfig.class);
 
         ctx.setServletContext(servletContext);
 

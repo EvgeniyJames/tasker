@@ -1,5 +1,6 @@
 package com.insart.tasker;
 
+import com.insart.tasker.services.UserDetailsServiceImpl;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -61,6 +63,11 @@ public class ApplicationConfiguration {
         return transactionManager;
     }
 
+    @Bean
+    public UserDetailsService getUserDetailsService() {
+        return new UserDetailsServiceImpl();
+    }
+
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getProperty(TASKER_HIBERNATE_DIALECT_PROPERTY_NAME));
@@ -68,7 +75,6 @@ public class ApplicationConfiguration {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty(TASKER_HIBERNATE_TO_DDL_PROPERTY_NAME));
         return properties;
     }
-
 
 }
 

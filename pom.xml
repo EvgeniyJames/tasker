@@ -15,6 +15,7 @@
         <hibernate.version>4.3.8.Final</hibernate.version>
         <slf4j.version>1.7.7</slf4j.version>
         <spring.jackson>1.9.13</spring.jackson>
+        <spring.securiry>3.2.6.RELEASE</spring.securiry>
     </properties>
 
     <dependencies>
@@ -48,6 +49,26 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>1.7.2.RELEASE</version>
         </dependency>
+
+        <!-- SPRING SECURITY -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.securiry}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.securiry}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.securiry}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>javax.servlet</groupId>
