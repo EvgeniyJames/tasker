@@ -80,7 +80,7 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return "User{" +
+        return " User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
