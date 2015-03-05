@@ -20,16 +20,11 @@ import java.util.Set;
 public interface TaskDAO extends JpaRepository<Task, Long> {
     Set<Task> findByStatus(TaskStatus taskStatus);
 
-    Set<Task> findByIdExecutor(Long idExecutor);
-
     Set<Task> findByIdTasklist(Long idTasklist);
 
     @Transactional
     @Modifying
     @Query("delete Task t where t.idTasklist = ?1")
     void deleteByIdTasklist(long id);
-
-    /*@Query("select object (o) from Task as o where o.title = ?1")
-    List<Task> findByTitleCustom(String title);*/
 
 }
