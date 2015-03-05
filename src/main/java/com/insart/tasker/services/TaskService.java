@@ -35,9 +35,8 @@ public class TaskService {
 
     public Task save(Task task){
         if(tasklistDAO.exists(task.getIdTasklist())) {
-            if(userDAO.exists(task.getIdExecutor())) {
-                return taskDAO.save(task);
-            }
+           { return taskDAO.save(task);
+           }
         }
         return new Task();
     }
@@ -53,10 +52,6 @@ public class TaskService {
     public Set<Task> findByStatus(String status) {
         TaskStatus taskStatus = Enum.valueOf(TaskStatus.class, status);
         return taskDAO.findByStatus(taskStatus);
-    }
-
-    public Set<Task> getByIdExecutor(Long idExecutor) {
-        return taskDAO.findByIdExecutor(idExecutor);
     }
 
     public Set<Task> findByIdTasklist(Long idTasklist) {

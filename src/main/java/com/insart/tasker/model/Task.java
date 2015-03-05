@@ -18,8 +18,6 @@ public class Task implements Serializable{
     private String descripton;
     private TaskStatus status;
     private Long idTasklist;
-    private Long idExecutor;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -73,14 +71,6 @@ public class Task implements Serializable{
         this.idTasklist = idTasklist;
     }
 
-    @Column(name = "id_executor")
-    public Long getIdExecutor() {
-        return idExecutor;
-    }
-
-    public void setIdExecutor(Long idExecutor) {
-        this.idExecutor = idExecutor;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -115,8 +105,7 @@ public class Task implements Serializable{
                 ", title='" + title + '\'' +
                 ", descripton='" + descripton + '\'' +
                 ", status=" + status +
-                ", idTasklist=" + idTasklist +
-                ", idExecutor=" + idExecutor +
+                ", idTasklist=" + idTasklist+
                 '}';
     }
 }

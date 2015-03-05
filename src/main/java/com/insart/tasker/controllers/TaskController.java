@@ -54,7 +54,6 @@ public class TaskController {
      * Добавить Таск в БД
      * @param title Заголовок
      * @param description Описание
-     * @param idExecutor id исполнителя
      * @param idTasklist id ТЛ
      * @return Запись в БД с Таском
      */
@@ -62,11 +61,9 @@ public class TaskController {
     public Task add(
             @RequestParam(value = "title") String title,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "idExecutor") String idExecutor,
             @RequestParam(value = "idTasklist") String idTasklist
     ) {
         try {
-            Long executor = Long.valueOf(idExecutor);
             Long tasklist = Long.valueOf(idTasklist);
 
             Task task = new Task();
@@ -74,8 +71,6 @@ public class TaskController {
             task.setDescripton(description);
             task.setStatus(TaskStatus.INACTIVE);
             task.setIdTasklist(tasklist);
-            task.setIdExecutor(executor);
-
             return taskService.save(task);
         } catch (NumberFormatException e) {
             System.out.println("Save Task ID Exception. " + e);
@@ -113,21 +108,4 @@ public class TaskController {
         return taskService.findByStatus(status);
     }
 
-    /**
-     * Набор Тасков по испольнителю
-     * @param idExecutor id испольнителя
-     * @return Набор Тасков исполнителя
-     */
-    @RequestMapping("/getByExecutor")
-    public Set<Task> getByExecutor(
-            @RequestParam(value = "idExecutor") String idExecutor
-    ) {
-        try {
-            Long l = Long.valueOf(idExecutor);
-            return taskService.getByIdExecutor(l);
-        } catch (NumberFormatException e) {
-            System.out.println("getByExecutor Task ID Exception. " + e);
-            throw new NumberFormatException();
-        }
-    }
 }

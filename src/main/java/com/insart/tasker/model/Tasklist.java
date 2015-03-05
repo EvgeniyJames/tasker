@@ -12,6 +12,7 @@ public class Tasklist implements Serializable{
     private long id;
     private String title;
     private Long idAuthor;
+    private Long idExecutor;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +44,15 @@ public class Tasklist implements Serializable{
         this.idAuthor = idAuthor;
     }
 
+    @Column(name = "id_executor")
+    public Long getIdExecutor() {
+        return idExecutor;
+    }
+
+    public void setIdExecutor(Long idExecutor) {
+        this.idExecutor = idExecutor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +79,7 @@ public class Tasklist implements Serializable{
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", idAuthor=" + idAuthor +
+                ", idExecutor=" + idExecutor +
                 '}';
     }
 }
