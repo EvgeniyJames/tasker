@@ -1,5 +1,7 @@
 package service;
+import com.insart.tasker.model.Task;
 import com.insart.tasker.model.User;
+import com.insart.tasker.services.TaskService;
 import com.insart.tasker.services.UserService;
 import config.TestDataBaseConfig;
 import org.junit.Before;
@@ -9,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import util.TaskUtil;
 import util.UserUtil;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -19,14 +22,14 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestDataBaseConfig.class)
 @WebAppConfiguration
-public class UserServiceTest {
+public class TaskServiceTest {
 
     @Resource
     private EntityManagerFactory emf;
     protected EntityManager em;
 
     @Resource
-    private UserService userService;
+    private TaskService taskService;
 
     @Before
     public void setUp() throws Exception {
@@ -34,34 +37,24 @@ public class UserServiceTest {
     }
 
     /*после выполнения этого теста занесется
-    * информация в таблицу user
-    * в данном случае - для 10-ти пользователей
+    * информация в таблицу task
+    * в данном случае - для 10-ти записей
     * */
     @Test
-    public void testSaveUser() throws Exception {
+    public void testSaveTask() throws Exception {
         for(int i=0;i<10;i++) {
-            userService.save(UserUtil.createUser("login"+i, "password"+i, "name"+i));
+            taskService.save(TaskUtil.createTask("title" + i, "desciption" + i,Long.valueOf(i)));
         }
     }
 
     /*после выполнения этого теста получаем
-    * список всех юзеров
-    */
-    @Test
-    public void testFindAll()
-    {   List <User> allUsers = userService.findAll();
-        for(User user : allUsers)
-        { System.out.println(user);
-        }
-    }
-
-    /*после выполнения этого теста получаем
-   * информацию о юзере по id
+   * список всех тасков в БД
    */
     @Test
-    public void testFindUserById()
-    {  Long id=Long.valueOf(3);
-       User user=userService.findUserById(id);
-       System.out.println("info about user with id " + id + user);
+    public void testFindAll()
+    {   List <Task> allTasks = taskService.findAll();
+        for(Task task:allTasks)
+        {System.out.println(task);
+        }
     }
 }

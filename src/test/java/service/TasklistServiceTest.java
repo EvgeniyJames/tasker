@@ -1,6 +1,7 @@
 package service;
-import com.insart.tasker.model.User;
-import com.insart.tasker.services.UserService;
+import com.insart.tasker.model.Task;
+import com.insart.tasker.model.Tasklist;
+import com.insart.tasker.services.TasklistService;
 import config.TestDataBaseConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import util.TasklistUtil;
 import util.UserUtil;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -19,14 +21,14 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestDataBaseConfig.class)
 @WebAppConfiguration
-public class UserServiceTest {
+public class TasklistServiceTest {
 
     @Resource
     private EntityManagerFactory emf;
     protected EntityManager em;
 
     @Resource
-    private UserService userService;
+    private TasklistService tasklistService;
 
     @Before
     public void setUp() throws Exception {
@@ -34,34 +36,25 @@ public class UserServiceTest {
     }
 
     /*после выполнения этого теста занесется
-    * информация в таблицу user
-    * в данном случае - для 10-ти пользователей
+    * информация в таблицу tasklist
+    * в данном случае - для 10-ти записей
     * */
     @Test
-    public void testSaveUser() throws Exception {
-        for(int i=0;i<10;i++) {
-            userService.save(UserUtil.createUser("login"+i, "password"+i, "name"+i));
+    public void testSaveTasklist() throws Exception {
+        for(int i=1;i<10;i++) {
+           tasklistService.save(TasklistUtil.createTasklist("title" + i,Long.valueOf(i),Long.valueOf(i-1)));
         }
     }
 
     /*после выполнения этого теста получаем
-    * список всех юзеров
-    */
+  * список всех тасклистов в БД
+  */
     @Test
     public void testFindAll()
-    {   List <User> allUsers = userService.findAll();
-        for(User user : allUsers)
-        { System.out.println(user);
+    {   List <Tasklist> allTasklists = tasklistService.findAll();
+        for(Tasklist tasklists:allTasklists)
+        {System.out.println(tasklists);
         }
     }
 
-    /*после выполнения этого теста получаем
-   * информацию о юзере по id
-   */
-    @Test
-    public void testFindUserById()
-    {  Long id=Long.valueOf(3);
-       User user=userService.findUserById(id);
-       System.out.println("info about user with id " + id + user);
-    }
 }
