@@ -2,32 +2,32 @@
     <div class="thumbnail user-inf">
         <div class="caption">
             <div class="btn-group-vertical pull-right">
-                <button ng-if="isFriend()" class="btn btn-default">
-                    Удалить из друзей
+                <button ng-if="isFriend" class="btn btn-default" ng-click="removeFromFriends(user)">
+                    Remove from friends
                 </button>
-                <button ng-if="!isFriend()" class="btn btn-primary">
-                    Добавить в друзья
+                <button ng-if="!isFriend" class="btn btn-primary" ng-click="addToFriends(user)">
+                    Add to friends
                 </button>
             </div>
-            <h3>Имя Пользователя</h3>
+            <h3>{{user.name}}</h3>
 
-            <p>login</p>
+            <p>{{user.login}}</p>
         </div>
     </div>
 
-    <div ng-if="isFriend()" class="panel-group" id="accordion">
-        <div class="panel panel-default" ng-repeat="taskList in [0,1,2]">
-            <div class="panel-heading" ng-click="collapseClc(taskList)">
+    <div ng-if="isFriend" class="panel-group" id="accordion">
+        <div class="panel panel-default" ng-repeat="taskList in taskLists">
+            <div class="panel-heading" ng-click="collapseClc(taskList.id)">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion">
-                        От {{taskList.author}}: {{taskList.title}}
+                        By you: {{taskList.title}}
                     </a>
-                    <span class="badge badge-default pull-right">2/3</span>
+                    <span class="badge badge-default pull-right">countNotDoTasks(taskList.id)/countTasks(taskList.id)</span>
                 </h4>
             </div>
-            <div id="{{taskList}}" class="panel-collapse collapse">
+            <div id="{{taskList.id}}" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <div class="thumbnail" ng-repeat="task in [0,1,2,3]">
+                    <div class="thumbnail" ng-repeat="task in tasks = loadTasks(taskList.id)" ng-if="task.status === 0">
                         <div class="caption">
                             <div class="btn-group-vertical pull-right">
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#basicModal">
@@ -38,22 +38,23 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button class="close" type="button" data-dismiss="modal">x</button>
-                                                <h4 class="modal-title" id="myModalLabel">Отмена задания</h4>
+                                                <h4 class="modal-title" id="myModalLabel">Canceling a task</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <h3>Вы точно хотите отменить задание?</h3>
+                                                <h3>Are you sure you want to cancel a task?</h3>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-success" type="button" >Да</button>
-                                                <button class="btn btn-danger" type="button" data-dismiss="modal">Отмена</button>
+                                                <button class="btn btn-success" type="button" data-dismiss="modal" ng-click="editTaskStatus(tasks, task, 2)">Yes</button>
+                                                <button class="btn btn-danger" type="button" data-dismiss="modal">No</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <h3>Заголовок: {{task.title}}</h3>
+                            <h3> Title: {{task.title}}</h3>
 
-                            <p>Описание: {{task.description}}</p>
+                            <p>Description
+                                {{task.description}}</p>
                         </div>
                     </div>
                 </div>

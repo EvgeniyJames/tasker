@@ -1,0 +1,20 @@
+<div>
+    <input type="text" ng-model="search" placeholder="Search..." class="input-search">
+
+    <div class="thumbnail user-inf" ng-repeat="user in users | filter:search | orderBy:'name'">
+        <div class="caption">
+            <div class="btn-group-vertical pull-right">
+                <button ng-if="isFriend" class="btn btn-default" ng-click=removeFromFriends(user)>
+                    Remove from friends
+                </button>
+                <button ng-if="!isFriend" class="btn btn-primary" ng-click=addToFriends(user)>
+                    Add to friends
+                </button>
+                <a href="#user/{{user.id}}" class="btn btn-lg btn-success pull-right" role="button">More...</a>
+            </div>
+            <h3>friend.name</h3>
+
+            <p>friend.login</p>
+        </div>
+    </div>
+</div>

@@ -1,17 +1,31 @@
 <div>
-    <div class="thumbnail user-inf" ng-repeat="friend in [0,1,2,3]">
+    <div class="thumbnail user-inf" ng-repeat="request in requests">
         <div class="caption">
             <div class="btn-group-vertical pull-right">
-                <button class="btn btn-default">
-                    Удалить из друзей
+                <button class="btn btn-default" ng-click=accept(request)>
+                    Add to friends
                 </button>
-                <button class="btn btn-primary">
-                    Назначить задание
+                <button class="btn btn-danger" ng-click=decline(request)>
+                    Remove request
                 </button>
+                <a href="#user/{{request.id}}" class="btn btn-lg btn-success pull-right" role="button">More...</a>
             </div>
-            <h3>Имя Пользователя</h3>
+            <h3>request.name</h3>
 
-            <p>login {{friend}}</p>
+            <p>request.login</p>
+        </div>
+    </div>
+    <div class="thumbnail user-inf" ng-repeat="friend in friends">
+        <div class="caption">
+            <div class="btn-group-vertical pull-right">
+                <button class="btn btn-default" ng-click=removeFromFriends(friend)>
+                    Remove from friends
+                </button>
+                <a href="#user/{{friend.id}}" class="btn btn-lg btn-success pull-right" role="button">More...</a>
+            </div>
+            <h3>friend.name</h3>
+
+            <p>friend.login</p>
         </div>
     </div>
 </div>

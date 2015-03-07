@@ -1,13 +1,25 @@
 <div>
 
-    <form class="form-signup" role="form">
+    <form class="form-signup" role="form" name="registerForm">
         <h2 class="form-signup-heading">Please sign up</h2>
-        <input name="name" type="text" class="form-control" placeholder="Name" required  >
-        <input name="login" type="text" class="form-control" placeholder="Login" required autofocus>
-        <input name="email" type="text" class="form-control" placeholder="Email address" required>
-        <input name="password" type="password" class="form-control" placeholder="Password" required>
-        <input name="password2" type="password" class="form-control " placeholder="Confirm password" required  style="margin-bottom: 5px;">
-        <input type="submit" value="Sign up" class="btn btn-lg btn-primary pull-right">
+        <div class="form-group">
+            <input name="name" type="text" class="form-control" placeholder="Name" ng-model="newUser.name" required autofocus>
+        </div>
+        <div class="form-group">
+            <input name="login" type="text" class="form-control" placeholder="Login" ng-model="newUser.login" required>
+            <span ng-show="loginRequired">{{loginRequired}}</span>
+        </div>
+        <div class="form-group">
+            <input name="password" type="password" class="form-control" placeholder="Password" ng-model="newUser.password" required>
+        </div>
+        <div class="form-group">
+            <input name="password2" type="password" class="form-control " placeholder="Confirm password" ng-model="confirmPassword" required>
+            <span ng-show="passwordRequired">{{passwordRequired}}</span>
+        </div>
+        <div class="form-group">
+            <a href="#login" class="btn btn-lg btn-primary" role="button">Sign in</a>
+            <input type="submit" value="Sign up" class="btn btn-lg btn-success pull-right" ng-click="saveData(newUser, confirmPassword)">
+        </div>
     </form>
 
 </div>

@@ -198,3 +198,14 @@ body {
 .user-inf .caption {
     color: white;
 }
+
+.modal-content {
+    color: black;
+    border-radius: 0px;
+}
+
+.input-search {
+    width: 100%;
+    padding: 5px;
+    color: black;
+}

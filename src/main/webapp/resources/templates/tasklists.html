@@ -1,0 +1,98 @@
+<div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default" ng-repeat="taskList in taskLists">
+            <div class="panel-heading" ng-click="collapseClc(taskList.id)">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion">
+                        Assigned {{nameById(taskList.idExecutor)}}: {{taskList.title}}
+                    </a>
+                    <span class="badge badge-default pull-right">countNotDoTasks(taskList.id)/countNotDoTasks(taskList.id)</span>
+                </h4>
+            </div>
+            <div id="{{taskList.id}}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="thumbnail" ng-repeat="task in tasks = loadTasks(taskList.id)" ng-if="task.status === 0">
+                        <div class="caption">
+                            <div class="btn-group-vertical pull-right">
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#basicModal">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button>
+                                <div class="modal fade" id="basicModal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button class="close" type="button" data-dismiss="modal">x</button>
+                                                <h4 class="modal-title">Canceling a task</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>Are you sure you want to cancel a task?</h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-success" type="button" ng-click="editTaskStatus(tasks, task, 2)">Yes</button>
+                                                <button class="btn btn-danger" type="button" data-dismiss="modal">No</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3> Title: {{task.title}}</h3>
+
+                            <p>Description
+                                {{task.description}}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pull-right" data-toggle="model" data-target="#taskAddModal">
+                        Add task
+                    </button>
+                    <div class="modal fade" id="taskAddModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button class="close" type="button" data-dismiss="modal">x</button>
+                                    <h4 class="modal-title">Add task</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input name="taskTitle" type="text" class="form-control" placeholder="Task title" ng-model="newTask.title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea rows="6" placeholder="Task description" ng-model="newTask.description" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-success" type="button" ng-click="taskAdd(taskList, newTask)">Add</button>
+                                    <button class="btn btn-danger" type="button" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#taskListAddModal">
+        Add task list
+    </button>
+    <div class="modal fade" id="taskListAddModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal">x</button>
+                    <h4 class="modal-title">Add task list</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input name="taskListTitle" type="text" class="form-control" placeholder="Task list title" ng-model="newTaskList.title" required>
+                    </div>
+                    <div class="form-group">
+                        <select ng-model="executor" ng-options="friend.name for friend in friends"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" data-dismiss="modal" ng-click="taskListAdd(executor, newTaskList)">Add</button>
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
