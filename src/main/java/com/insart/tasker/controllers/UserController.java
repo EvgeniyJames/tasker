@@ -143,28 +143,35 @@ public class UserController {
         return  userService.findUserById(id);
     }
 
-    @RequestMapping(value = "/friends", method = RequestMethod.GET)
+    /////// TODO Change to /friends
+    @RequestMapping(value = "/{id}/friends", method = RequestMethod.GET)
     public Set<User> getFriends(@PathVariable("id") Long id) {
         return userService.findUserFriends(id);
     }
 
-    @RequestMapping(value = "/request", method = RequestMethod.GET)
-    public List<Friendship> getFriendRequests() {
-        return friendshipDAO.findAll();
+    /////// TODO Change to /request
+    @RequestMapping(value = "/{id}/request", method = RequestMethod.GET)
+    public List<Friendship> getFriendRequests(@PathVariable("id") Long id) {
+        return friendshipDAO.findByIdOneAndRelationship(id, FriendshipStatus.INVITE);
     }
 
+    // TODO
     @RequestMapping(value = "/{id_friend}/request", method = RequestMethod.POST)
     public Friendship sendFriendRequest(@PathVariable("id_friend") Long id_friend) {
+        ///return userService.sendFriendshipRequest(Long.valueOf(idOne), Long.valueOf(idTwo));
         return new Friendship();
     }
 
+    // TODO
     @RequestMapping(value = "/{id_friend}/request/", method = RequestMethod.PUT)
     public Friendship acceptFriendRequest(@PathVariable("id_friend") Long idFriend) {
         return new Friendship();
     }
 
+    // TODO
     @RequestMapping(value = "/{id_friend}/request", method = RequestMethod.DELETE)
     public String declineFriendRequest(@PathVariable("id_friend") Long idFriend) {
+        //userService.deleteFriend(Long.valueOf(idOne),Long.valueOf(idTwo));
         return "ok";
     }
 
@@ -177,19 +184,4 @@ public class UserController {
     public User findUserByLogin(@PathVariable("login") String login) {
         return userService.findByLogin(login);
     }
-
-    /*    @RequestMapping(value = "/user/request", method = RequestMethod.POST)
-    public Friendship sendFriendRequest( @RequestParam(value = "idOne", required = false) String idOne,
-                                         @RequestParam(value = "idTwo", required = false) String idTwo) {
-        return userService.sendFriendshipRequest(Long.valueOf(idOne), Long.valueOf(idTwo));
-    }
-
-    @RequestMapping(value = "/user/request/", method = RequestMethod.DELETE)
-    public void declineFriendRequest( @RequestParam(value = "idOne", required = false) String idOne,
-                                      @RequestParam(value = "idTwo", required = false) String idTwo) {
-        userService.deleteFriend(Long.valueOf(idOne),Long.valueOf(idTwo));
-    }
-    * */
-
-
 }

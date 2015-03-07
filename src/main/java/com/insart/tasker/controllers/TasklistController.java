@@ -82,6 +82,7 @@ public class TasklistController {
         }
     }*/
 
+    // TODO this implementation is wrong
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Tasklist> getTaskListsForCurrentUser() {
         return tasklistService.findAll();
@@ -99,17 +100,15 @@ public class TasklistController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Tasklist createTaskList(@RequestBody Tasklist taskList) {
-        Tasklist new_tasklist = new Tasklist();
-        new_tasklist.setIdAuthor(taskList.getIdAuthor());
-        new_tasklist.setTitle(taskList.getTitle());
-        new_tasklist.setIdExecutor(taskList.getIdExecutor());
-        return tasklistService.save(new_tasklist);
+        return tasklistService.save(taskList);
 }
 
+    // TODO change tasklistserveice func
     @RequestMapping(value = "/{id}/task", method = RequestMethod.POST)
     public Task createTaskInTaskList(@RequestBody Task task) {
         //может быть неправильно
-        return tasklistService.addTaskInTasklist(task.getTitle(),task.getDescripton(),task.getStatus(),task.getIdTasklist());
+        return tasklistService.addTaskInTasklist(task.getTitle(), task.getDescripton(),
+                task.getStatus(), task.getIdTasklist());
     }
 
     @RequestMapping(value = "/task/{id_task}", method = RequestMethod.DELETE)
@@ -127,11 +126,13 @@ public class TasklistController {
         return taskService.get(taskId);
     }
 
+    // TODO
     @RequestMapping(value = "/task/{id_task}/status", method = RequestMethod.PUT)
     public TaskStatus setTaskStatus(@PathVariable("id_task") Long taskId, @RequestBody TaskStatus status) {
         return TaskStatus.INACTIVE;
     }
 
+    // TODO
     @RequestMapping(value = "/task/{id_task}/status", method = RequestMethod.GET)
     public TaskStatus getTaskStatus(@PathVariable("id_task") Long taskId) {
         return TaskStatus.INACTIVE;
