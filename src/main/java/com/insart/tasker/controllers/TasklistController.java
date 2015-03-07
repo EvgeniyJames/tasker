@@ -84,42 +84,47 @@ public class TasklistController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Tasklist> getTaskListsForCurrentUser() {
-        return new ArrayList<>();
+        return tasklistService.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Tasklist getTaskListById(@PathVariable("id") Long taskListId) {
-        return new Tasklist();
+        return tasklistService.get(taskListId);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteTaskList(@PathVariable("id") Long taskListId) {
-        return "ok";
+    public void deleteTaskList(@PathVariable("id") Long taskListId) {
+        tasklistService.delete(taskListId);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public Tasklist createTaskList(@RequestBody Tasklist taskList) {
-        return new Tasklist();
-    }
+        Tasklist new_tasklist = new Tasklist();
+        new_tasklist.setIdAuthor(taskList.getIdAuthor());
+        new_tasklist.setTitle(taskList.getTitle());
+        new_tasklist.setIdExecutor(taskList.getIdExecutor());
+        return tasklistService.save(new_tasklist);
+}
 
     @RequestMapping(value = "/{id}/task", method = RequestMethod.POST)
     public Task createTaskInTaskList(@RequestBody Task task) {
-        return new Task();
+        //может быть неправильно
+        return tasklistService.addTaskInTasklist(task.getTitle(),task.getDescripton(),task.getStatus(),task.getIdTasklist());
     }
 
     @RequestMapping(value = "/task/{id_task}", method = RequestMethod.DELETE)
-    public String deleteTaskFromTaskList(@PathVariable("id_task") Long taskId) {
-        return "ok";
+    public void  deleteTaskFromTaskList(@PathVariable("id_task") Long taskId) {
+        taskService.delete(taskId);
     }
 
     @RequestMapping(value = "/{id}/task", method = RequestMethod.GET)
-    public List<Task> getAllTasksFromTaskList(@PathVariable("id") Long taskListId) {
-        return new ArrayList<>();
+    public Set<Task> getAllTasksFromTaskList(@PathVariable("id") Long taskListId) {
+        return taskService.findByIdTasklist(taskListId);
     }
 
     @RequestMapping(value = "/task/{id_task}", method = RequestMethod.GET)
     public Task getTaskFromTaskList(@PathVariable("id_task") Long taskId) {
-        return new Task();
+        return taskService.get(taskId);
     }
 
     @RequestMapping(value = "/task/{id_task}/status", method = RequestMethod.PUT)

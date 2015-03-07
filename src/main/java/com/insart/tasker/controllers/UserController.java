@@ -126,7 +126,11 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public User addUser(@RequestBody User user) {
-        return new User();
+        User new_user = new User();
+        new_user.setLogin(user.getLogin());
+        new_user.setPassword(user.getPassword());
+        user.setName(user.getName());
+        return userService.save(new_user);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -136,17 +140,17 @@ public class UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUserInfoById(@PathVariable("id") Long id) {
-        return new User();
+        return  userService.findUserById(id);
     }
 
     @RequestMapping(value = "/friends", method = RequestMethod.GET)
-    public List<User> getFriends() {
-        return new ArrayList<>();
+    public Set<User> getFriends(@PathVariable("id") Long id) {
+        return userService.findUserFriends(id);
     }
 
     @RequestMapping(value = "/request", method = RequestMethod.GET)
     public List<Friendship> getFriendRequests() {
-        return new ArrayList<>();
+        return friendshipDAO.findAll();
     }
 
     @RequestMapping(value = "/{id_friend}/request", method = RequestMethod.POST)
@@ -166,11 +170,26 @@ public class UserController {
 
     @RequestMapping(value = "/{id}/tasklist", method = RequestMethod.GET)
     public List<Tasklist> getTaskListsCreatedByUser(@PathVariable("id") Long id) {
-        return new ArrayList<>();
+        return userService.getTaskListsCreatedByUser(id);
     }
 
     @RequestMapping(value = "/search/{login}", method = RequestMethod.GET)
-    public List<User> findUserByLogin(@PathVariable("login") String login) {
-        return new ArrayList<>();
+    public User findUserByLogin(@PathVariable("login") String login) {
+        return userService.findByLogin(login);
     }
+
+    /*    @RequestMapping(value = "/user/request", method = RequestMethod.POST)
+    public Friendship sendFriendRequest( @RequestParam(value = "idOne", required = false) String idOne,
+                                         @RequestParam(value = "idTwo", required = false) String idTwo) {
+        return userService.sendFriendshipRequest(Long.valueOf(idOne), Long.valueOf(idTwo));
+    }
+
+    @RequestMapping(value = "/user/request/", method = RequestMethod.DELETE)
+    public void declineFriendRequest( @RequestParam(value = "idOne", required = false) String idOne,
+                                      @RequestParam(value = "idTwo", required = false) String idTwo) {
+        userService.deleteFriend(Long.valueOf(idOne),Long.valueOf(idTwo));
+    }
+    * */
+
+
 }

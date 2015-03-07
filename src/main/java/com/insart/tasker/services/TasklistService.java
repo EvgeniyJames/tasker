@@ -3,11 +3,12 @@ package com.insart.tasker.services;
 import com.insart.tasker.dao.TaskDAO;
 import com.insart.tasker.dao.TasklistDAO;
 import com.insart.tasker.dao.UserDAO;
+import com.insart.tasker.enums.TaskStatus;
 import com.insart.tasker.model.Task;
 import com.insart.tasker.model.Tasklist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.insart.tasker.services.TaskService;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,10 @@ public class TasklistService {
 
     @Autowired
     private TaskDAO taskDAO;
+
+
+    @Autowired
+    private TaskService taskService;
 
     public List<Tasklist> findAll(){
         return tasklistDAO.findAll();
@@ -71,4 +76,16 @@ public class TasklistService {
         }
         tasklistDAO.deleteByIdAuthor(idAuthor);
     }
+
+    /*добавть таск в тасклист*/
+    public Task addTaskInTasklist(String title,String description,TaskStatus status, Long idTasklist )
+    {
+        Task task = new Task();
+        task.setTitle(title);
+        task.setDescripton(description);
+        task.setStatus(TaskStatus.INACTIVE);
+        task.setIdTasklist(Long.valueOf(idTasklist));
+        return taskService.save(task);
+    }
+
 }
