@@ -1,15 +1,15 @@
 package com.insart.tasker.controllers;
 
 import com.insart.tasker.dao.FriendshipDAO;
+import com.insart.tasker.enums.FriendshipStatus;
 import com.insart.tasker.model.Friendship;
+import com.insart.tasker.model.Tasklist;
 import com.insart.tasker.model.User;
 import com.insart.tasker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,20 +22,12 @@ import java.util.Set;
 public class UserController {
 
     @Autowired
-
     private UserService userService;
 
     @Autowired
     private FriendshipDAO friendshipDAO;
 
-    /**
-     * Добавление {@link com.insart.tasker.model.User} в БД
-     * @param login Login
-     * @param password Password
-     * @param name Name
-     * @return {@link com.insart.tasker.model.User} в БД
-     */
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public User addUser(
             @RequestParam(value = "login") String login,
             @RequestParam(value = "password") String password,
@@ -48,10 +40,6 @@ public class UserController {
         return userService.save(user);
     }
 
-    /**
-     * Удаление {@link com.insart.tasker.model.User}
-     * @param id id of deleting {@link com.insart.tasker.model.User}
-     */
     @RequestMapping("/deleteUser")
     public void deleteUser(
             @RequestParam(value = "id")String id
@@ -66,29 +54,16 @@ public class UserController {
         userService.delete(l);
     }
 
-    /**
-     * Список всех {@link com.insart.tasker.model.User} из БД
-     * @return {@link java.util.List} {@link com.insart.tasker.model.User} из БД
-     */
     @RequestMapping("/getUsers")
     public List<User> getUsers() {
         return userService.findAll();
     }
 
-    /**
-     * Список всех {@link com.insart.tasker.model.Friendship} из БД
-     * @return{@link java.util.List} {@link com.insart.tasker.model.Friendship} из БД
-     */
     @RequestMapping("/getFriendships")
     public List<Friendship> getFriendships() {
         return friendshipDAO.findAll();
     }
 
-    /**
-     * Получить набор {@link com.insart.tasker.model.User} - друзей
-     * @param id id {@link com.insart.tasker.model.User}, чей набор нужно получить
-     * @return {@link java.util.Set} {@link com.insart.tasker.model.User} - Друзей
-     */
     @RequestMapping("/getFriends")
     public Set getFriends(
             @RequestParam(value = "id") String id
@@ -103,11 +78,6 @@ public class UserController {
         return userService.findUserFriends(l);
     }
 
-    /**
-     * Получить набор {@link com.insart.tasker.model.User} подписчиков
-     * @param id id {@link com.insart.tasker.model.User}, чей набор нужно получить
-     * @return {@link java.util.Set} {@link com.insart.tasker.model.User} - подписчиков
-     */
     @RequestMapping("/getInviters")
     public Set<User> getInviters(
             @RequestParam(value = "id") String id
@@ -122,12 +92,6 @@ public class UserController {
         return userService.findUserInviters(l);
     }
 
-    /**
-     * Добавить запрос на дружбу
-     * @param idOne id запрашивающего
-     * @param idTwo id запрашиваемого
-     * @return Запись Friendship в БД
-     */
     @RequestMapping("/addFriendRequest")
     public Friendship addFriendRequset(
             @RequestParam(value = "idOne", required = false) String idOne,
@@ -144,11 +108,6 @@ public class UserController {
         return userService.sendFriendshipRequest(l1, l2);
     }
 
-    /**
-     * Разорвать дружбу пользователей
-     * @param idOne id разываемого дружбу
-     * @param idTwo id с кем разрывается дружба
-     */
     @RequestMapping("/deleteFriend")
     public void deleteFriend(
             @RequestParam(value = "idOne", required = false) String idOne,
@@ -163,5 +122,74 @@ public class UserController {
             throw new NumberFormatException();
         }
         userService.deleteFriend(l1, l2);
+    }*/
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public User addUser(@RequestBody User user) {
+        User new_user = new User();
+        new_user.setLogin(user.getLogin());
+        new_user.setPassword(user.getPassword());
+        user.setName(user.getName());
+        return userService.save(new_user);
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public List<User> getAllUsers() {
+        return userService.findAll();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User getUserInfoById(@PathVariable("id") Long id) {
+        return  userService.findUserById(id);
+    }
+
+    @RequestMapping(value = "/friends", method = RequestMethod.GET)
+    public Set<User> getFriends(@PathVariable("id") Long id) {
+        return userService.findUserFriends(id);
+    }
+
+    @RequestMapping(value = "/request", method = RequestMethod.GET)
+    public List<Friendship> getFriendRequests() {
+        return friendshipDAO.findAll();
+    }
+
+    @RequestMapping(value = "/{id_friend}/request", method = RequestMethod.POST)
+    public Friendship sendFriendRequest(@PathVariable("id_friend") Long id_friend) {
+        return new Friendship();
+    }
+
+    @RequestMapping(value = "/{id_friend}/request/", method = RequestMethod.PUT)
+    public Friendship acceptFriendRequest(@PathVariable("id_friend") Long idFriend) {
+        return new Friendship();
+    }
+
+    @RequestMapping(value = "/{id_friend}/request", method = RequestMethod.DELETE)
+    public String declineFriendRequest(@PathVariable("id_friend") Long idFriend) {
+        return "ok";
+    }
+
+    @RequestMapping(value = "/{id}/tasklist", method = RequestMethod.GET)
+    public List<Tasklist> getTaskListsCreatedByUser(@PathVariable("id") Long id) {
+        return userService.getTaskListsCreatedByUser(id);
+    }
+
+    @RequestMapping(value = "/search/{login}", method = RequestMethod.GET)
+    public User findUserByLogin(@PathVariable("login") String login) {
+        return userService.findByLogin(login);
+    }
+
+    /*    @RequestMapping(value = "/user/request", method = RequestMethod.POST)
+    public Friendship sendFriendRequest( @RequestParam(value = "idOne", required = false) String idOne,
+                                         @RequestParam(value = "idTwo", required = false) String idTwo) {
+        return userService.sendFriendshipRequest(Long.valueOf(idOne), Long.valueOf(idTwo));
+    }
+
+    @RequestMapping(value = "/user/request/", method = RequestMethod.DELETE)
+    public void declineFriendRequest( @RequestParam(value = "idOne", required = false) String idOne,
+                                      @RequestParam(value = "idTwo", required = false) String idTwo) {
+        userService.deleteFriend(Long.valueOf(idOne),Long.valueOf(idTwo));
+    }
+    * */
+
+
 }

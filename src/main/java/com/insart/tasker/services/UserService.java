@@ -4,6 +4,7 @@ import com.insart.tasker.dao.FriendshipDAO;
 import com.insart.tasker.dao.UserDAO;
 import com.insart.tasker.enums.FriendshipStatus;
 import com.insart.tasker.model.Friendship;
+import com.insart.tasker.model.Tasklist;
 import com.insart.tasker.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -178,6 +179,13 @@ public class UserService {
 
     public User findUserById(Long id) {
         return userDAO.findOne(id);
+    }
+
+    public List<Tasklist> getTaskListsCreatedByUser(Long id)
+    {    return userDAO.getTaskListsByUser(id);
+    }
+    public User findByLogin(String login) {
+        return userDAO.findByLogin(login);
     }
 
 
