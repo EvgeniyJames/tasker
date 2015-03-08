@@ -13,12 +13,12 @@ function RegisterCtrl($scope, Users) {
             $scope.passwordRequired = '';
         }
 
-        if (Users.byLogin(newUser.login) != null) {
+        /*if (Users.byLogin(newUser.login) != null) {
             isValid = false;
             $scope.loginRequired = 'This login is already used';
         } else {
             $scope.loginRequired = '';
-        }
+        }*/
 
         if (isValid) {
             Users.create(newUser);

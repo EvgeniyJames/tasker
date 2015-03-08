@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/").access("isAuthenticated()")
+                .antMatchers("/me").access("isAuthenticated()")
                 .and().formLogin();
 
         http.csrf()
@@ -43,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and();
 
         http.formLogin()
-                .loginPage("/login")
+                .loginPage("/")
                 .loginProcessingUrl("/j_spring_security_check")
-                .failureUrl("/login?error")
+                .failureUrl("/?error")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .permitAll();
@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .permitAll()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/?logout")
                 .invalidateHttpSession(true);
     }
 }

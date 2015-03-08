@@ -2,7 +2,7 @@ angular.module('taskerApp', ['ngRoute'])
     .config(['$routeProvider', '$locationProvider',
         function ($routeProvider, $locationProvider) {
             $routeProvider
-                .when('/login', {
+                .when('/', {
                     templateUrl: '/resources/templates/login.html',
                     controller: 'LoginCtrl'
                 })
@@ -18,7 +18,7 @@ angular.module('taskerApp', ['ngRoute'])
                     templateUrl: '/resources/templates/search.html',
                     controller: 'SearchCtrl'
                 })
-                .when('/', {
+                .when('/me', {
                     templateUrl: '/resources/templates/me.html',
                     controller: 'MeCtrl'
                 })
@@ -31,7 +31,6 @@ angular.module('taskerApp', ['ngRoute'])
                     controller: 'FriendsCtrl'
                 })
                 .otherwise({
-                    redirectTo: '/'
+                    redirectTo: '/me'
                 });
-
         }]);
