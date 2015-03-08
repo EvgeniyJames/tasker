@@ -2,6 +2,7 @@
 <html ng-app="taskerApp">
 <head lang="en">
     <meta charset="UTF-8">
+    <base href="/">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -32,13 +33,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#/">Tasker</a>
+                <a class="navbar-brand" href="/me">Tasker</a>
             </div>
             <div class="navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{active: $location.path() == '/me'}"><a href="#me">Me</a></li>
-                    <li ng-class="{active: $location.path() == '/friends'}"><a href="#friends">Friends</a></li>
-                    <li ng-class="{active: $location.path() == '/tasklists'}"><a href="#tasklists">Task lists</a></li>
+                    <li ng-class="{active: $location.path() == '/'}"><a href="/me">Me</a></li>
+                    <li ng-class="{active: $location.path() == '/friends'}"><a href="/friends">Friends</a></li>
+                    <li ng-class="{active: $location.path() == '/tasklists'}"><a href="/tasklists">Task lists</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" action="/logout">
                     <button class="btn btn-warning navbar-right">
@@ -46,7 +47,7 @@
                     </button>
                 </form>
                 <ul class="nav navbar-nav pull-right">
-                    <li ng-class="{active: $location.path() == '/search'}"><a href="#search">Search...</a></li>
+                    <li ng-class="{active: $location.path() == '/search'}"><a href="/search">Search...</a></li>
                 </ul>
             </div>
         </div>
